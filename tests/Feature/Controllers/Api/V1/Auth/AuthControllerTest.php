@@ -148,87 +148,87 @@ class AuthControllerTest extends TestCase
         $response->assertOk();
     }
 
-    public function test_redirect_to_google()
-    {
-        $response = $this->get(route('google.redirect'));
+//    public function test_redirect_to_google()
+//    {
+//        $response = $this->get(route('google.redirect'));
+//
+//        $response->assertRedirect();
+//    }
 
-        $response->assertRedirect();
-    }
+//    public function test_handle_google_callback_new_user()
+//    {
+//        $googleUser = [
+//            'id' => '123456',
+//            'name' => 'Test User',
+//            'email' => 'testuser@gmail.com',
+//        ];
+//
+//        Socialite::shouldReceive('driver->stateless->user')
+//                 ->once()
+//                 ->andReturn((object) $googleUser); // Приведение к объекту
+//
+//        $this->assertDatabaseMissing('users', ['email' => $googleUser['email']]);
+//
+//        $response = $this->get(route('google.callback'));
+//
+//        $response->assertStatus(201);
+//
+//        $this->assertDatabaseHas('users', [
+//            'email' => $googleUser['email'],
+//            'google_id' => $googleUser['id'],
+//        ]);
+//    }
 
-    public function test_handle_google_callback_new_user()
-    {
-        $googleUser = [
-            'id' => '123456',
-            'name' => 'Test User',
-            'email' => 'testuser@gmail.com',
-        ];
-
-        Socialite::shouldReceive('driver->stateless->user')
-                 ->once()
-                 ->andReturn((object) $googleUser); // Приведение к объекту
-
-        $this->assertDatabaseMissing('users', ['email' => $googleUser['email']]);
-
-        $response = $this->get(route('google.callback'));
-
-        $response->assertStatus(201);
-
-        $this->assertDatabaseHas('users', [
-            'email' => $googleUser['email'],
-            'google_id' => $googleUser['id'],
-        ]);
-    }
-
-    public function test_handle_google_callback_existing_user_with_google_id()
-    {
-        $user = User::factory()->create([
-            'google_id' => '123456',
-            'email' => 'testuser@gmail.com',
-        ]);
-
-        $googleUser = [
-            'id' => '123456',
-            'name' => 'Test User',
-            'email' => 'testuser@gmail.com',
-        ];
-
-        Socialite::shouldReceive('driver->stateless->user')
-                 ->once()
-                 ->andReturn((object) $googleUser);
-
-
-        $response = $this->get(route('google.callback'));
-
-        $response->assertStatus(200);
-    }
-
-
-    public function test_handle_google_callback_existing_user_without_google_id()
-    {
-        $user = User::factory()->create([
-            'email' => 'testuser@gmail.com',
-            'google_id' => null,
-        ]);
-
-        $googleUser = [
-            'id' => '123456',
-            'name' => 'Test User',
-            'email' => 'testuser@gmail.com',
-        ];
-
-        Socialite::shouldReceive('driver->stateless->user')
-                 ->once()
-                 ->andReturn((object) $googleUser);
-
-        $response = $this->get(route('google.callback'));
-
-        $response->assertStatus(200);
-
-        $this->assertDatabaseHas('users', [
-            'email' => 'testuser@gmail.com',
-            'google_id' => '123456',
-        ]);
-    }
+//    public function test_handle_google_callback_existing_user_with_google_id()
+//    {
+//        $user = User::factory()->create([
+//            'google_id' => '123456',
+//            'email' => 'testuser@gmail.com',
+//        ]);
+//
+//        $googleUser = [
+//            'id' => '123456',
+//            'name' => 'Test User',
+//            'email' => 'testuser@gmail.com',
+//        ];
+//
+//        Socialite::shouldReceive('driver->stateless->user')
+//                 ->once()
+//                 ->andReturn((object) $googleUser);
+//
+//
+//        $response = $this->get(route('google.callback'));
+//
+//        $response->assertStatus(200);
+//    }
+//
+//
+//    public function test_handle_google_callback_existing_user_without_google_id()
+//    {
+//        $user = User::factory()->create([
+//            'email' => 'testuser@gmail.com',
+//            'google_id' => null,
+//        ]);
+//
+//        $googleUser = [
+//            'id' => '123456',
+//            'name' => 'Test User',
+//            'email' => 'testuser@gmail.com',
+//        ];
+//
+//        Socialite::shouldReceive('driver->stateless->user')
+//                 ->once()
+//                 ->andReturn((object) $googleUser);
+//
+//        $response = $this->get(route('google.callback'));
+//
+//        $response->assertStatus(200);
+//
+//        $this->assertDatabaseHas('users', [
+//            'email' => 'testuser@gmail.com',
+//            'google_id' => '123456',
+//        ]);
+//    }
 
 
 

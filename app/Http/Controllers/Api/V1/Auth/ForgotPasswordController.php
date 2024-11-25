@@ -44,7 +44,7 @@ class ForgotPasswordController extends Controller {
 
         if (!$resetCode) {
             return response()->json([
-                'message' => 'Сторінку не знайдено'
+                'message' => 'Код не існує'
             ], 404);
         }
 
@@ -60,11 +60,11 @@ class ForgotPasswordController extends Controller {
 
            return response()->json([
                 'token' => $resetCode->token,
-           ], 200);
+           ]);
        }
 
         return response()->json([
-            'message' => 'Сторінку не знайдено'
+            'message' => 'Код не існує'
         ], 404);
     }
 
@@ -76,14 +76,16 @@ class ForgotPasswordController extends Controller {
                 'message' => 'Сторінку не знайдено'
             ], 404);
         }
+
         $user = $resetCodePassword->user;
         $user->update([
             'password' => $request->password
         ]);
         $resetCodePassword->delete();
         return response()->json([
-            'message' => 'Пароль змінено'
-        ], 200);
+            'message' => 'Пароль змінено',
+            'emailUser' => $user->email
+        ]);
 
     }
 }
