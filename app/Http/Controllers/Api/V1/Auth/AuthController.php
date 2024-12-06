@@ -37,7 +37,7 @@ class AuthController extends Controller
             ], 401);
         }
         $user = Auth::user();
-        $user->tokens()->delete();
+
         return new UserResource($user);
     }
 
@@ -74,7 +74,6 @@ class AuthController extends Controller
         }
 
         auth()->login($user, true);
-        $user->tokens()->delete();
 
         return new UserResource($user);
     }

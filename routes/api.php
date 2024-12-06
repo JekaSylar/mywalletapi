@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\V1\Auth\AuthController;
 use \App\Http\Controllers\Api\V1\Auth\ForgotPasswordController;
+use App\Http\Controllers\Api\V1\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\AccountController;
 
@@ -14,8 +15,11 @@ Route::prefix('v1')->group(function () {
         });
 
         Route::apiResource('accounts', AccountController::class);
+        Route::apiResource('category', CategoryController::class)->except([
+            'show'
+        ]);
 
-        Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+        Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
     });
 
