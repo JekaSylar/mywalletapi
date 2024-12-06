@@ -143,7 +143,7 @@ class AuthControllerTest extends TestCase
 
        Sanctum::actingAs( $user, ['*']);
 
-        $response = $this->post(route('logout'));
+        $response = $this->get(route('logout'));
 
         $response->assertOk();
     }
