@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\Auth\AuthController;
 use \App\Http\Controllers\Api\V1\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\V1\CategoryController;
+use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\AccountController;
 
@@ -18,6 +19,12 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('category', CategoryController::class)->except([
             'show'
         ]);
+        Route::prefix('user')->group(function () {
+            Route::get('/', [UserController::class, 'index'])->name('user.index');
+            Route::put('/', [UserController::class, 'update'])->name('user.update');
+            Route::delete('/', [UserController::class, 'destroy'])->name('user.destroy');
+        });
+
 
         Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 

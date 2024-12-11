@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\V1\StoreCategoryRequest;
-use App\Http\Requests\Api\V1\UpdateCategoryRequest;
+use App\Http\Requests\Api\V1\Categories\StoreCategoryRequest;
+use App\Http\Requests\Api\V1\Categories\UpdateCategoryRequest;
 use App\Http\Resources\Api\V1\Categories\CategoryResource;
 use App\Models\Category;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
@@ -20,7 +19,7 @@ class CategoryController extends Controller
         $user = Auth::user();
         $categories = $user->categories()
                            ->orderBy('name', 'asc')
-                           ->paginate(5);
+                           ->paginate(25);
 
         return CategoryResource::collection( $categories);
     }

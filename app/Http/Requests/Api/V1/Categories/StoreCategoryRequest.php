@@ -1,21 +1,17 @@
 <?php
 
-namespace App\Http\Requests\Api\V1;
+namespace App\Http\Requests\Api\V1\Categories;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCategoryRequest extends FormRequest
+class StoreCategoryRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        $category = $this->route('category');
-        return auth()->check() && $category && $category->user->id === auth()->id();
+        return auth()->check();
     }
 
     /**
