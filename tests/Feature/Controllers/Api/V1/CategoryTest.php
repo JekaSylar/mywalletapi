@@ -1,12 +1,10 @@
 <?php
 
-namespace Tests\Feature\Controllers\Api\V1\Categories;
+namespace Controllers\Api\V1;
 
-use App\Models\Account;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CategoryTest extends TestCase
